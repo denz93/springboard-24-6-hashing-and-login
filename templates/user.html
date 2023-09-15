@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% set title  = 'Welcome ' + user.username + '!' %}
+{% block content %}
+  <section>
+    <h2>Information</h2>
+    <ul>
+      {% for key, value in user.to_dict().items() %}
+        {% if key not in ['password', 'salt', 'feedbacks', 'password_resets'] %}
+          <li>{{key}}: {{value}}</li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+  </section>
+  <section>
+    <h2>Feedbacks</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Title</th>
+          <th>Content</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for feedback  in user.feedbacks  %}
+        <tr>
+
+          <td>{{loop.index}}</td>
+          <td>{{feedback.title}}</td>
+          <td>{{feedback.content}}</td>
+          <td>
+            <form style="flex-direction: row">
+              <button class="btn btn-outline-success " type="submit" formaction="/feedbacks/{{feedback.id}}/update" formmethod="GET">Edit</button>
+              <button class="btn btn-outline-danger type="submit" formaction="/feedbacks/{{feedback.id}}/delete" formmethod="POST">Delete</button>
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </section>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% set title  = 'Update feedback' %}
+{% block content %}
+  <form action="/feedbacks/{{feedback.id}}/update" method="POST">
+    <div>
+      {{form.title.label(class="form-label")}}
+      {{form.title(class="form-control")}}
+    </div>
+    <div>
+      {{form.content.label(class="form-label") }}
+      {{form.content(class="form-control")}}
+    </div>
+    <div>
+      <button type="submit" class="btn btn-primary">Update</button>
+    </div>
+  </form>
+{% endblock %}

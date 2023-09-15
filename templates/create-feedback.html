@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% set title  = 'New Feedback' %}
+{% block content  %}
+  <form action="/users/{{user.username}}/feedback/add" method="POST">
+    <div>
+      {{form.title.label(class="form-label")}}
+      {{form.title(class="form-control")}} 
+    </div>
+    <div>
+      {{form.content.label(class="form-label") }}
+      {{form.content(class="form-control")}}
+    </div>
+    <div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+  </form>
+{% endblock %}

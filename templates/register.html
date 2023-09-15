@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% set title  = 'Register' %}
+{% block content %}
+  <form action="/register" method="POST">
+    {% for field in form %}
+      <div>
+        {{field.label(class="form-label")}}
+        {{field(size=30, class='form-control')}}
+      </div>
+      
+    {% endfor %}
+    <div>
+      <button type="submit" class="btn btn-primary">Sign up</button>
+    </div>
+  </form>
+{% endblock %}

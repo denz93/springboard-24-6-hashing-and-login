@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{title}}</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="{{url_for('static', filename='styles.css')}}">
+</head>
+<body >
+  <div class="container-fluid">
+    <nav class="navbar navbar-expand ">
+      <div class="navbar-collapse ">
+
+        <div class="navbar-nav ">
+          
+          <a class="nav-link" href="/">Home</a>
+          {% if not user %}
+            <a class="nav-link" href="/register">Register</a>
+            <a class="nav-link" href="/login">Login</a>
+          {% endif %}
+          {% if user %}
+            <a class="nav-link" href="/users/{{user.username}}/feedback/add">Add Feedback</a>
+            {% if user.is_admin %}
+              <a href="/admin/users" class="nav-link">User List</a>
+              <a href="/admin/feedbacks" class="nav-link">Feedback List</a>
+            {% endif %}
+            <form action="">
+      
+              <button class="btn btn-outline-success" type="submit" formaction="/logout" formmethod="POST" >Logout</button>
+            </form>
+          {% endif %}
+        </div>
+      </div>
+    </nav>
+    <h1>{{title}}</h1>
+    {% for cat, message in get_flashed_messages(true) %}
+      {% set type = cat if cat != 'error' else 'danger' %}
+      <div class="alert alert-{{type}}">{{message}}</div>
+    {% endfor %}
+    {% block content %}
+      
+    {% endblock %}
+
+  </div>
+</body>
+</html>

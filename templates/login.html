@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% set title  = 'Login' %}
+{% block content %}
+  <form action="/login" method="POST">
+      {% for field  in form  %}
+      <div>
+        {{field.label(class="form-label")}}
+        {{field(class="form-control")}}
+      </div>
+      {% endfor %}
+      <div>
+        <button type="submit" class="btn btn-primary">Log in</button>
+      </div>
+  </form>
+  <div>
+    <a href="/password/reset">Forgot password?</a>
+  </div>
+{% endblock %}

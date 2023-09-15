@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% set title  = 'Feedbacks' %}
+{% block content %}
+  <table>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Title</th>
+        <th>Actions</th>
+      </tr>
+
+    </thead>
+    <tbody>
+      {% for feedback in feedbacks %}
+      <tr>
+        <td>{{loop.index}}</td>
+        <td>{{feedback.title}}</td>
+        <td>
+          <form style="flex-direction: row">
+            <button class="btn btn-outline-success " type="submit" formaction="/feedbacks/{{feedback.id}}/update" formmethod="GET">Edit</button>
+            <button class="btn btn-outline-danger" type="submit" formaction="/feedbacks/{{feedback.id}}/delete" formmethod="POST">Delete</button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+    
+  </table>
+{% endblock %}
